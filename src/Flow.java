@@ -12,4 +12,10 @@ public class Flow {
         //TODO output results
     }
 
+    public Edge getEdge(String a, String b){
+        if (a.compareTo(b)<0)
+            return edgeTable.get(a+b);
+        return edgeTable.get(b+a);
+    }
+
 }
