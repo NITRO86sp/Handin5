@@ -11,7 +11,7 @@ public class Edge {
         current=0;
         rest=0;
     }
-    
+
     public int getCapacity(){
         return capacity;
     }
@@ -38,5 +38,11 @@ public class Edge {
             rest-=diff;
             return true;
         }
+    }
+
+    public boolean isForward(){
+        if (current>=rest)
+            return true;
+        return false;
     }
 }
