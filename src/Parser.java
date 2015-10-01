@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Parser {
 
     private Scanner sc;
-    private Node[] nodesList;
+    private int[][] Adj;
 
     public Parser(String filepath) {
 
@@ -17,16 +17,9 @@ public class Parser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void parse() {
-        Node[] extractedNodes = extractNodes();
-        for (Node extractedNode : extractedNodes) System.out.print(extractedNode.name + " ");
-
-        Edge[] extractedEdges = extractEdges();
-        for (Edge extractedEdge : extractedEdges) System.out.print(extractedEdge.capacity + " ");
-
+        extractNodes();
+        extractEdges();
+        System.out.println(Adj[5][7]);
 
     }
 
@@ -34,29 +27,30 @@ public class Parser {
     private Node[] extractNodes() {
         sc.useDelimiter("\\r");
         int numberOfNodes = Integer.parseInt(sc.next());
-        nodesList = new Node[numberOfNodes];
+        Node[] nodes = new Node[numberOfNodes];
         for (int i = 0; i < numberOfNodes; i++) {
-            nodesList[i] = new Node(sc.next().trim());
+            nodes[i] = new Node(sc.next().trim(), i);
         }
-        return nodesList;
+        return nodes;
     }
 
-    private Edge[] extractEdges() {
+    private int[][] extractEdges() {
 
         int numberOfEdges = Integer.parseInt(sc.next().trim());
-        Edge[] edges = new Edge[numberOfEdges];
-        int i = 0;
+
+        Adj = new int[numberOfEdges][numberOfEdges];
         sc.useDelimiter("\\r");
         while (sc.hasNext("\\n\\d.*")) {
             String scCurrent = sc.next().trim();
             String[] edgeElements = scCurrent.split(" ");
-            edges[i] = new Edge(nodesList[Integer.parseInt(edgeElements[0].trim())],
-                    nodesList[Integer.parseInt(edgeElements[1].trim())],
-                    Integer.parseInt(edgeElements[2].trim()));
-            i++;
+            Adj[Integer.parseInt(edgeElements[0])][Integer.parseInt(edgeElements[1])] = Integer.parseInt(edgeElements[2]);
 
         }
-        return edges;
+        return Adj;
+    }
+
+    public int[][] getMatrix() {
+        return Adj;
     }
 
 }

@@ -1,48 +1,60 @@
 
 public class Edge {
     Node a, b;
-    int capacity, current, rest;
+    int capacity, flow, residualFlow;
 
 
     public Edge(Node a, Node b, int C){
         this.a=a;
         this.b=b;
         capacity=C;
-        current=0;
-        rest=0;
+        flow =0;
+        residualFlow =0;
     }
 
     public int getCapacity(){
         return capacity;
     }
 
-    public int getCurrent(){
-        return current;
+    public int getFlow(){
+        return flow;
     }
 
-    public int getRest(){
-        return rest;
+    public int getResidualFlow(){
+        return residualFlow;
     }
 
     public boolean canAdd(int diff){
-        if (current+diff>capacity || current+diff<0)
+        if (flow +diff>capacity || flow +diff<0)
             return false;
         return true;
     }
 
     public boolean addFlow(int diff){
-        if (current+diff>capacity || current+diff<0)
+        if (flow +diff>capacity || flow +diff<0)
             return false;
         else{
-            current+=diff;
-            rest-=diff;
+            flow +=diff;
+            residualFlow -=diff;
             return true;
         }
     }
 
     public boolean isForward(){
-        if (current>=rest)
+        if (flow >= residualFlow)
             return true;
         return false;
+    }
+
+    public int getANode(){
+        return a.getID();
+    }
+
+    public Node getA() {
+        return a;
+    }
+
+    public Node getB() {
+        return b;
     }
 }
