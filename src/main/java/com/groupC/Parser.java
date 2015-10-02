@@ -22,10 +22,26 @@ public class Parser {
 
     }
 
+    public Parser(File file) {
+
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        extractNodes();
+        extractEdges();
+        System.out.println(Adj[5][7]);
+
+    }
+
 
     private Node[] extractNodes() {
-        sc.useDelimiter("\\r");
-        int numberOfNodes = Integer.parseInt(sc.next());
+        sc.useDelimiter("\\n");
+        int numberOfNodes = 0;
+
+        numberOfNodes = Integer.parseInt(sc.next().trim());
+
         Node[] nodes = new Node[numberOfNodes];
         for (int i = 0; i < numberOfNodes; i++) {
             nodes[i] = new Node(sc.next().trim(), i);
