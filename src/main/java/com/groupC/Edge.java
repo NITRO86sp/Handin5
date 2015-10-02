@@ -1,3 +1,4 @@
+package com.groupC;
 
 public class Edge {
     Node a, b;

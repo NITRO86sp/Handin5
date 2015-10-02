@@ -1,3 +1,4 @@
+package com.groupC;
 
 public class Algorithm {
     public int augment(int flow, Edge[] P){
